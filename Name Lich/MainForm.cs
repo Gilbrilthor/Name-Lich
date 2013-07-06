@@ -38,9 +38,10 @@ namespace Name_Lich
             {
                 path = ApplicationDeployment.CurrentDeployment.DataDirectory;
             }
-            catch (Exception)
+            catch (InvalidDeploymentException ex)
             {
-                path = "";
+                Debug.WriteLine("Exception Caught: {0}", ex);
+                path = ".";
             }
 
             try

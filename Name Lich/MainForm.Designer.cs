@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.cbNameType = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -184,6 +185,7 @@
             this.Controls.Add(this.cbNameType);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.msTopMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msTopMenu;
             this.Name = "MainForm";
             this.Text = "Name Lich";
