@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Name_Lich_Backend;
+using System.Deployment.Application;
 
 #if DEBUG
 using System.Diagnostics;
@@ -21,7 +22,7 @@ namespace Name_Lich
 
         AbstractNameReader reader;
         private static Random random;
-        private const string NAM_LOCATION = @"NamFiles";
+        private const string NAM_LOCATION = @"/NamFiles";
         private List<AbstractNameGenerator> generators;
 
         public MainForm()
@@ -31,7 +32,26 @@ namespace Name_Lich
             random = new Random();
             reader = new NamFileNameReader(random);
 
-            generators = reader.ReadNameParts(NAM_LOCATION);
+            string path;
+
+            try
+            {
+                path = ApplicationDeployment.CurrentDeployment.DataDirectory;
+            }
+            catch (Exception)
+            {
+                path = "";
+            }
+
+            try
+            {
+                generators = reader.ReadNameParts(path + NAM_LOCATION);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(string.Format("Error! {0} is not a valid location.", path + NAM_LOCATION));
+                Application.Exit();
+            }
 
             cbNameType.DataSource = generators;
         }

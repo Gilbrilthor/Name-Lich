@@ -14,6 +14,9 @@ namespace Name_Lich
         [STAThread]
         static void Main()
         {
+#if DEBUG
+            System.Diagnostics.Debugger.Launch(); 
+#endif
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
