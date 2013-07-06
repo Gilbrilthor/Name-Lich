@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Name_Lich_Backend.AbstractNameReader">
+    <Position X="2.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AbstractNameReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Name_Lich_Backend.NamFileNameReader">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAQAAAAAAAAAAAAACEAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>NamFileNameReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Name_Lich_Backend.AbstractNameGenerator">
+    <Position X="6.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAIAAgAAAAAAAAAA=</HashCode>
+      <FileName>AbstractNameGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Name_Lich_Backend.NamNameGenerator">
+    <Position X="6.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQgAAAAAAAAAAAAAAAQAAAAAAAAIAAAAQAAAAAABg=</HashCode>
+      <FileName>NamNameGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

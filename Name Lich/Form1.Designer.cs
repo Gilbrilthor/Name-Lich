@@ -32,7 +32,7 @@
             this.cbNameType = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.nNameNumber = new System.Windows.Forms.NumericUpDown();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvGeneratedNames = new System.Windows.Forms.ListView();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.lblNames = new System.Windows.Forms.Label();
@@ -50,6 +50,7 @@
             // 
             // cbNameType
             // 
+            this.cbNameType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNameType.FormattingEnabled = true;
             this.cbNameType.Location = new System.Drawing.Point(13, 30);
             this.cbNameType.Name = "cbNameType";
@@ -82,13 +83,15 @@
             0,
             0});
             // 
-            // listView1
+            // lvGeneratedNames
             // 
-            this.listView1.Location = new System.Drawing.Point(140, 30);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(127, 185);
-            this.listView1.TabIndex = 4;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.lvGeneratedNames.Font = new System.Drawing.Font("Liberation Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvGeneratedNames.Location = new System.Drawing.Point(140, 30);
+            this.lvGeneratedNames.Name = "lvGeneratedNames";
+            this.lvGeneratedNames.Size = new System.Drawing.Size(127, 185);
+            this.lvGeneratedNames.TabIndex = 4;
+            this.lvGeneratedNames.UseCompatibleStateImageBehavior = false;
+            this.lvGeneratedNames.View = System.Windows.Forms.View.List;
             // 
             // btnGenerate
             // 
@@ -98,7 +101,7 @@
             this.btnGenerate.TabIndex = 5;
             this.btnGenerate.Text = "&Generate";
             this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Click += new System.EventHandler(this.button1_Click);
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
             // btnExit
             // 
@@ -108,6 +111,7 @@
             this.btnExit.TabIndex = 6;
             this.btnExit.Text = "E&xit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lblNames
             // 
@@ -126,7 +130,7 @@
             this.Controls.Add(this.lblNames);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnGenerate);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lvGeneratedNames);
             this.Controls.Add(this.nNameNumber);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbNameType);
@@ -145,7 +149,7 @@
         private System.Windows.Forms.ComboBox cbNameType;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown nNameNumber;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lvGeneratedNames;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblNames;
