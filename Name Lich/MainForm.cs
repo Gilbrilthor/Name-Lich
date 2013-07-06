@@ -12,7 +12,7 @@ using Name_Lich_Backend;
 
 namespace Name_Lich
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
 
         AbstractNameReader reader;
@@ -21,7 +21,7 @@ namespace Name_Lich
         private List<AbstractNameGenerator> generators;
 
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
 
@@ -71,6 +71,13 @@ namespace Name_Lich
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var aboutBox = new NameLichAboutBox();
+
+            aboutBox.ShowDialog();
         }
     }
 }
