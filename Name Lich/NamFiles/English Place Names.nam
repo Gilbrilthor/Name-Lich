@@ -1,0 +1,125 @@
+/*****************************************************/
+/*                                                   */
+/*             Place Names (English)                 */
+/*             Created by Erik Lutz                  */
+/*           link_creations@yahoo.com                */
+/*                                                   */
+/*****************************************************/
+<start>
+
+/* Nature-related nouns */
+Rose
+Fern
+Moss
+Clover
+Oak
+Ash
+Apple
+Maple
+Willow
+Pine
+Wood
+Dew
+Seed
+Wheat
+Gardens
+Orchards
+Root
+Rock
+Flint
+River
+Lake
+
+/* Names (End with s) */
+Marks
+Johns
+Richards
+Kens
+Bens
+Jacks
+Carls
+James
+Rons
+Brents
+Beths
+Clarks
+Annies
+
+/* Misc Nouns (Singular, plural, or both depending on the word */
+Summers
+Spring
+Lark
+Larks
+Sparrow
+Buck
+Pikes
+Church
+Market
+Kings
+Prince
+Keys
+Bridge
+Corners
+Cart
+Fork
+Farm
+Furrows
+
+/* Misc Adjectives/Prepositions */
+Green
+Brown
+Red
+Level
+High
+Great
+Far
+Under
+Fair
+Sunny
+New
+Free
+Over
+North
+South
+East
+West
+Brass
+Long
+
+/* Professions (End with s) */
+Farmers
+Bakers
+Weavers
+Tailors
+Smiths
+Hunters
+Loggers
+Mason
+
+/* Other */
+Duns
+Burk
+Rush
+Hunts
+Burns
+
+
+<middle>
+/* No middles for these names, so just end the name */
+ton
+port
+bay
+field
+hill
+grove
+ford
+valley
+bourogh
+haven
+park
+burg
+town
+ville
+
+
+<end>

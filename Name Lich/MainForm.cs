@@ -17,7 +17,7 @@ namespace Name_Lich
 
         AbstractNameReader reader;
         private static Random random;
-        private const string NAM_LOCATION = @"D:\Users\Matthew\Dropbox\Jerianne and Matthew\NameMage\Names";
+        private const string NAM_LOCATION = @"NamFiles";
         private List<AbstractNameGenerator> generators;
 
 
