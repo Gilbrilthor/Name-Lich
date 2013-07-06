@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label1 = new System.Windows.Forms.Label();
             this.cbNameType = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.nNameNumber = new System.Windows.Forms.NumericUpDown();
-            this.lvGeneratedNames = new System.Windows.Forms.ListView();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.lblNames = new System.Windows.Forms.Label();
@@ -42,9 +42,13 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStatusLblLeft = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbGeneratedNames = new System.Windows.Forms.ListBox();
+            this.cMenuNameMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.regenerateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.nNameNumber)).BeginInit();
             this.msTopMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.cMenuNameMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -90,16 +94,6 @@
             0,
             0,
             0});
-            // 
-            // lvGeneratedNames
-            // 
-            this.lvGeneratedNames.Font = new System.Drawing.Font("Liberation Mono", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lvGeneratedNames.Location = new System.Drawing.Point(140, 50);
-            this.lvGeneratedNames.Name = "lvGeneratedNames";
-            this.lvGeneratedNames.Size = new System.Drawing.Size(127, 185);
-            this.lvGeneratedNames.TabIndex = 4;
-            this.lvGeneratedNames.UseCompatibleStateImageBehavior = false;
-            this.lvGeneratedNames.View = System.Windows.Forms.View.List;
             // 
             // btnGenerate
             // 
@@ -170,16 +164,40 @@
             this.toolStatusLblLeft.Name = "toolStatusLblLeft";
             this.toolStatusLblLeft.Size = new System.Drawing.Size(0, 17);
             // 
+            // lbGeneratedNames
+            // 
+            this.lbGeneratedNames.FormattingEnabled = true;
+            this.lbGeneratedNames.Location = new System.Drawing.Point(141, 49);
+            this.lbGeneratedNames.Name = "lbGeneratedNames";
+            this.lbGeneratedNames.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lbGeneratedNames.Size = new System.Drawing.Size(120, 186);
+            this.lbGeneratedNames.TabIndex = 10;
+            this.lbGeneratedNames.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lbGeneratedNames_RightMouseClick);
+            // 
+            // cMenuNameMenu
+            // 
+            this.cMenuNameMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.regenerateToolStripMenuItem});
+            this.cMenuNameMenu.Name = "cMenuNameMenu";
+            this.cMenuNameMenu.Size = new System.Drawing.Size(134, 26);
+            // 
+            // regenerateToolStripMenuItem
+            // 
+            this.regenerateToolStripMenuItem.Name = "regenerateToolStripMenuItem";
+            this.regenerateToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.regenerateToolStripMenuItem.Text = "&Regenerate";
+            this.regenerateToolStripMenuItem.Click += new System.EventHandler(this.regenerateToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(279, 273);
+            this.Controls.Add(this.lbGeneratedNames);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lblNames);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnGenerate);
-            this.Controls.Add(this.lvGeneratedNames);
             this.Controls.Add(this.nNameNumber);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbNameType);
@@ -194,6 +212,7 @@
             this.msTopMenu.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.cMenuNameMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,7 +224,6 @@
         private System.Windows.Forms.ComboBox cbNameType;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown nNameNumber;
-        private System.Windows.Forms.ListView lvGeneratedNames;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblNames;
@@ -214,6 +232,9 @@
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStatusLblLeft;
+        private System.Windows.Forms.ListBox lbGeneratedNames;
+        private System.Windows.Forms.ContextMenuStrip cMenuNameMenu;
+        private System.Windows.Forms.ToolStripMenuItem regenerateToolStripMenuItem;
     }
 }
 
