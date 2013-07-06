@@ -36,10 +36,14 @@
             this.btnGenerate = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.lblNames = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.msTopMenu = new System.Windows.Forms.MenuStrip();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStatusLblLeft = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.nNameNumber)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.msTopMenu.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -125,15 +129,23 @@
             this.lblNames.TabIndex = 7;
             this.lblNames.Text = "Names";
             // 
-            // menuStrip1
+            // msTopMenu
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.msTopMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
             this.aboutToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(279, 24);
-            this.menuStrip1.TabIndex = 8;
-            this.menuStrip1.Text = "menuStrip1";
+            this.msTopMenu.Location = new System.Drawing.Point(0, 0);
+            this.msTopMenu.Name = "msTopMenu";
+            this.msTopMenu.Size = new System.Drawing.Size(279, 24);
+            this.msTopMenu.TabIndex = 8;
+            this.msTopMenu.Text = "menuStrip1";
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -142,11 +154,27 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // Form1
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStatusLblLeft});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 251);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(279, 22);
+            this.statusStrip1.TabIndex = 9;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStatusLblLeft
+            // 
+            this.toolStatusLblLeft.Name = "toolStatusLblLeft";
+            this.toolStatusLblLeft.Size = new System.Drawing.Size(0, 17);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 247);
+            this.ClientSize = new System.Drawing.Size(279, 273);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lblNames);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnGenerate);
@@ -155,13 +183,15 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbNameType);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Controls.Add(this.msTopMenu);
+            this.MainMenuStrip = this.msTopMenu;
+            this.Name = "MainForm";
             this.Text = "Name Lich";
             ((System.ComponentModel.ISupportInitialize)(this.nNameNumber)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.msTopMenu.ResumeLayout(false);
+            this.msTopMenu.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,8 +207,11 @@
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblNames;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip msTopMenu;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStatusLblLeft;
     }
 }
 
