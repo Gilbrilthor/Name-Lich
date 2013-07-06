@@ -58,7 +58,7 @@ namespace Name_Lich
         }
 
         /// <summary>
-        /// Generates a number of names and populates the listview with them.
+        /// Generates a number of names and populates the listBox with them.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
@@ -69,7 +69,7 @@ namespace Name_Lich
             var watch = Stopwatch.StartNew();
 #endif
             // Clear the old names
-            lvGeneratedNames.Clear();
+            lbGeneratedNames.Items.Clear();
 
             // Get the selected generator
             var generator = cbNameType.SelectedItem as AbstractNameGenerator;
@@ -80,12 +80,12 @@ namespace Name_Lich
                 // Create a list of ListViewItems from names generated
                 var generatedNames = 
                     (from number in Enumerable.Range(0, (int)nNameNumber.Value)
-                         select new ListViewItem(generator.GenerateName(), 0));
+                         select generator.GenerateName());
 
                 // Add all the generated names to the list view
                 foreach (var name in generatedNames)
                 {
-                    lvGeneratedNames.Items.Add(name);
+                    lbGeneratedNames.Items.Add(name);
                 }
             }
 
@@ -105,6 +105,11 @@ namespace Name_Lich
             Application.Exit();
         }
 
+        /// <summary>
+        /// Shows the about form.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var aboutBox = new NameLichAboutBox();
@@ -112,22 +117,96 @@ namespace Name_Lich
             aboutBox.ShowDialog();
         }
 
+        /// <summary>
+        /// Copies the selected indices of the Generated Names to the clipboard.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
 
-            for (int i = 0; i < lvGeneratedNames.Items.Count - 1; i++)
+            for (int i = 0; i < lbGeneratedNames.SelectedItems.Count - 1; i++)
             {
-                var name = lvGeneratedNames.Items[i];
+                var name = lbGeneratedNames.SelectedItems[i];
 
-                sb.AppendLine(name.Text);
+                sb.AppendLine((string)name);
             }
-
-            sb.Append(lvGeneratedNames.Items[lvGeneratedNames.Items.Count - 1].Text);
+            sb.Append(lbGeneratedNames.SelectedItems[lbGeneratedNames.SelectedItems.Count - 1]);
 
             Clipboard.SetText(sb.ToString());
-            var statusText = string.Format("{0} names copied to the clipboard", lvGeneratedNames.Items.Count);
+            var statusText = string.Format("{0} names copied to the clipboard", lbGeneratedNames.SelectedItems.Count);
             toolStatusLblLeft.Text = statusText;
+        }
+
+        /// <summary>
+        /// Detects when the mouse button is released in the form list box. If not on an index, deselect everything.
+        /// If the right mouse, show the context menu.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+        private void lbGeneratedNames_RightMouseClick(object sender, MouseEventArgs e)
+        {
+            Debug.WriteLine("Mouse button released in list box!");
+
+            var index = lbGeneratedNames.IndexFromPoint(e.Location);
+
+            if (index < 0)
+                lbGeneratedNames.SelectedIndices.Clear();
+
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                Debug.WriteLine("Right mouse button released in list box!");
+
+                if (index >= 0)
+                {
+                    // If they click outside the selection, clear it and just pick that one
+                    if (!lbGeneratedNames.SelectedIndices.Contains(index))
+                    {
+                        lbGeneratedNames.SelectedIndices.Clear();
+                        lbGeneratedNames.SelectedIndices.Add(index);
+                    }
+
+                    cMenuNameMenu.Show(lbGeneratedNames.PointToScreen(e.Location)); 
+                }
+            }
+        }
+
+        /// <summary>
+        /// Regenerates the selected names.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void regenerateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (lbGeneratedNames.SelectedIndices.Count > 0)
+            {
+                var generator = cbNameType.SelectedItem as AbstractNameGenerator;
+
+                if (generator != null)
+                {
+                    var indices = new List<int>(lbGeneratedNames.SelectedIndices.Count);
+
+                    // Copy the selected indices. Changing them destroys the integrity of the SelectedIndices collection
+                    foreach (int index in lbGeneratedNames.SelectedIndices)
+                    {
+                        indices.Add(index);
+                    }
+
+                    // Change the names that are selected.
+                    foreach (int index in indices)
+                    {
+                        lbGeneratedNames.Items[index] = generator.GenerateName();
+                    }
+
+                    // Reselect the old indices
+                    lbGeneratedNames.SelectedIndices.Clear();
+                    foreach (int index in indices)
+                    {
+                        lbGeneratedNames.SelectedIndices.Add(index);
+                    }
+                }
+            }
         }
     }
 }
