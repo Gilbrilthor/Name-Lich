@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Name_Lich_Backend;
 using System.Deployment.Application;
 
 #if DEBUG
+
 using System.Diagnostics;
+
 #endif
 
 namespace Name_Lich
 {
     public partial class MainForm : Form
     {
-
-        AbstractNameReader reader;
+        private AbstractNameReader reader;
         private static Random random;
         private const string NAM_LOCATION = @"/NamFiles";
         private List<AbstractNameGenerator> generators;
@@ -64,7 +61,6 @@ namespace Name_Lich
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-
 #if DEBUG
             var watch = Stopwatch.StartNew();
 #endif
@@ -78,9 +74,9 @@ namespace Name_Lich
             if (generator != null)
             {
                 // Create a list of ListViewItems from names generated
-                var generatedNames = 
+                var generatedNames =
                     (from number in Enumerable.Range(0, (int)nNameNumber.Value)
-                         select generator.GenerateName());
+                     select generator.GenerateName());
 
                 // Add all the generated names to the list view
                 foreach (var name in generatedNames)
@@ -167,7 +163,7 @@ namespace Name_Lich
                         lbGeneratedNames.SelectedIndices.Add(index);
                     }
 
-                    cMenuNameMenu.Show(lbGeneratedNames.PointToScreen(e.Location)); 
+                    cMenuNameMenu.Show(lbGeneratedNames.PointToScreen(e.Location));
                 }
             }
         }

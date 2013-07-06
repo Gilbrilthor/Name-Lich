@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Name_Lich_Backend
 {
@@ -31,9 +30,9 @@ namespace Name_Lich_Backend
         /// <returns>A name.</returns>
         public override string GenerateName()
         {
-            string beginning = (startList.Any()? startList[random.Next(startList.Count)]: "");
-            string middle = (middleList.Any()? middleList[random.Next(middleList.Count)]: "");
-            string end = (endList.Any()? endList[random.Next(endList.Count)]: "");
+            string beginning = (startList.Any() ? startList[random.Next(startList.Count)] : "");
+            string middle = (middleList.Any() ? middleList[random.Next(middleList.Count)] : "");
+            string end = (endList.Any() ? endList[random.Next(endList.Count)] : "");
 
             return string.Format("{0}{1}{2}", beginning, middle, end);
         }

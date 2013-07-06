@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
-
 
 namespace Name_Lich_Backend
 {
@@ -65,6 +64,5 @@ namespace Name_Lich_Backend
         {
             return Directory.EnumerateFiles(directoryPath, NAME_FILE_SUFFIX);
         }
-
     }
 }

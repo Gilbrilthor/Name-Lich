@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Name_Lich_Backend
+﻿namespace Name_Lich_Backend
 {
     public abstract class AbstractNameGenerator
     {
-    
         public string NameType
         {
             get
