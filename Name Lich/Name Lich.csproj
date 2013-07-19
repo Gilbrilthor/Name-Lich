@@ -88,6 +88,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NameBuilder\NameBuilder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NameBuilder\NameBuilder.Designer.cs">
+      <DependentUpon>NameBuilder.cs</DependentUpon>
+    </Compile>
     <Compile Include="NameLichAboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -593,6 +599,7 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

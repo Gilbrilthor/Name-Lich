@@ -12,6 +12,24 @@ namespace Name_Lich_Backend
         private List<string> middleList;
         private List<string> endList;
 
+        public List<string> StartList
+        {
+            get { return startList; }
+            set { startList = value; }
+        }
+
+        public List<string> MiddleList
+        {
+            get { return middleList; }
+            set { middleList = value; }
+        }
+
+        public List<string> EndList
+        {
+            get { return endList; }
+            set { endList = value; }
+        }
+
         private Random random;
 
         public NamNameGenerator(System.Random random, string nameType, IEnumerable<string> startList, IEnumerable<string> middleList, IEnumerable<string> endList)
