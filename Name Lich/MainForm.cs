@@ -1,17 +1,11 @@
-﻿using System;
+﻿using Name_Lich_Backend;
+using System;
 using System.Collections.Generic;
+using System.Deployment.Application;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
-using Name_Lich_Backend;
-using System.Deployment.Application;
-
-#if DEBUG
-
-using System.Diagnostics;
-
-#endif
 
 namespace Name_Lich
 {
@@ -120,18 +114,33 @@ namespace Name_Lich
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
+            string statusText;
 
-            for (int i = 0; i < lbGeneratedNames.SelectedItems.Count - 1; i++)
+            var numNames = lbGeneratedNames.SelectedItems.Count;
+
+            // Make sure that there are some names to be selected
+            if (numNames > 0)
             {
-                var name = lbGeneratedNames.SelectedItems[i];
+                StringBuilder sb = new StringBuilder();
 
-                sb.AppendLine((string)name);
+                for (int i = 0; i < numNames - 1; i++)
+                {
+                    var name = lbGeneratedNames.SelectedItems[i];
+
+                    sb.AppendLine((string)name);
+                }
+                sb.Append(lbGeneratedNames.SelectedItems[numNames - 1]);
+
+                Clipboard.SetText(sb.ToString());
+                statusText = string.Format("{0} name{1} copied to the clipboard", numNames, numNames == 1 ? "" : "s");
             }
-            sb.Append(lbGeneratedNames.SelectedItems[lbGeneratedNames.SelectedItems.Count - 1]);
+            else
+            {
+                // There were no names selected. Let the user know
+                statusText = "No names are selected!";
+            }
 
-            Clipboard.SetText(sb.ToString());
-            var statusText = string.Format("{0} names copied to the clipboard", lbGeneratedNames.SelectedItems.Count);
+            // Display the text that needs to be displayed
             toolStatusLblLeft.Text = statusText;
         }
 
