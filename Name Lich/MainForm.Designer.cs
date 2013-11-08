@@ -138,6 +138,7 @@
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.copyToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
@@ -205,6 +206,7 @@
             this.Controls.Add(this.msTopMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msTopMenu;
+            this.MinimumSize = new System.Drawing.Size(295, 311);
             this.Name = "MainForm";
             this.Text = "Name Lich";
             ((System.ComponentModel.ISupportInitialize)(this.nNameNumber)).EndInit();
