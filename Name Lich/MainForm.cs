@@ -213,5 +213,40 @@ namespace Name_Lich
                 }
             }
         }
+
+        public delegate void addScratchPadNamesDelegate(IEnumerable<string> list);
+
+        private addScratchPadNamesDelegate addNamesDelegate;
+
+        private ScratchPad pad;
+
+        public void openScratchPad()
+        {
+            if (pad == null)
+            {
+                pad = new ScratchPad();
+                addNamesDelegate = new addScratchPadNamesDelegate(pad.AddNames);
+            }
+
+            pad.Show();
+            btnSendToScratchPad.Visible = true;
+        }
+
+        private void showScratchPadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openScratchPad();
+        }
+
+        private void btnSendToScratchPad_Click(object sender, EventArgs e)
+        {
+            if (lbGeneratedNames.SelectedItems.Count > 0)
+            {
+                addNamesDelegate(lbGeneratedNames.SelectedItems.Cast<string>());
+            }
+            else
+            {
+                toolStatusLblLeft.Text = "No names are selected!";
+            }
+        }
     }
 }
