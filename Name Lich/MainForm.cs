@@ -92,6 +92,10 @@ namespace Name_Lich
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnExit_Click(object sender, EventArgs e)
         {
+            if (pad != null && !pad.IsDisposed)
+            {
+                pad.Dispose();
+            }
             Application.Exit();
         }
 
