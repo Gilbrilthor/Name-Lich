@@ -1,17 +1,11 @@
-﻿using System;
+﻿using Name_Lich_Backend;
+using System;
 using System.Collections.Generic;
+using System.Deployment.Application;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
-using Name_Lich_Backend;
-using System.Deployment.Application;
-
-#if DEBUG
-
-using System.Diagnostics;
-
-#endif
 
 namespace Name_Lich
 {

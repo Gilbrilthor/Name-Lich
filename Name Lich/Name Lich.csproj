@@ -88,12 +88,6 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NameBuilder\NameBuilder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NameBuilder\NameBuilder.Designer.cs">
-      <DependentUpon>NameBuilder.cs</DependentUpon>
-    </Compile>
     <Compile Include="NameLichAboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
