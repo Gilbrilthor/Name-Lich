@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Name Lich", "Name Lich\Name Lich.csproj", "{6D77D5EF-7012-45AB-A709-059431563B52}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Name Lich Backend", "Name Lich Backend\Name Lich Backend.csproj", "{93BDC814-0B79-4538-8AA9-A62F8327F33A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loggerLib", "loggerLib\loggerLib.csproj", "{58C0BE6A-2712-4ADA-82B4-5E20536FD451}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +23,10 @@ Global
 		{93BDC814-0B79-4538-8AA9-A62F8327F33A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93BDC814-0B79-4538-8AA9-A62F8327F33A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93BDC814-0B79-4538-8AA9-A62F8327F33A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58C0BE6A-2712-4ADA-82B4-5E20536FD451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58C0BE6A-2712-4ADA-82B4-5E20536FD451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58C0BE6A-2712-4ADA-82B4-5E20536FD451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58C0BE6A-2712-4ADA-82B4-5E20536FD451}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

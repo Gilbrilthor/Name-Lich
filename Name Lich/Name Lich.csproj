@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftp://matthewpaul.me/nameLich/</PublishUrl>
+    <PublishUrl>C:\Users\Matthew\Dropbox\Public\Name Lich\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -22,10 +22,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://matthewpaul.me/namelich/</InstallUrl>
+    <InstallUrl>https://dl.dropboxusercontent.com/u/77899731/Name%2520Lich/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -241,6 +241,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\loggerLib\loggerLib.csproj">
+      <Project>{58c0be6a-2712-4ada-82b4-5e20536fd451}</Project>
+      <Name>loggerLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Name Lich Backend\Name Lich Backend.csproj">
       <Project>{93bdc814-0b79-4538-8aa9-a62f8327f33a}</Project>
       <Name>Name Lich Backend</Name>
