@@ -32,6 +32,7 @@ namespace Name_Lich
             catch (InvalidDeploymentException ex)
             {
                 Debug.WriteLine("Exception Caught: {0}", ex);
+                Program.logger.Error(String.Format("Exception Caught: {0}", ex));
                 path = ".";
             }
 
@@ -42,6 +43,7 @@ namespace Name_Lich
             catch (Exception)
             {
                 MessageBox.Show(string.Format("Error! {0} is not a valid location.", path + NAM_LOCATION));
+                Program.logger.Error(string.Format("Error! {0} is not a valid location.", path + NAM_LOCATION));
                 Application.Exit();
             }
 
@@ -55,9 +57,9 @@ namespace Name_Lich
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-#if DEBUG
+            Program.logger.Info("Generate button clicked");
+
             var watch = Stopwatch.StartNew();
-#endif
             // Clear the old names
             lbGeneratedNames.Items.Clear();
 
@@ -78,10 +80,8 @@ namespace Name_Lich
                 lbGeneratedNames.Items.Add(name);
             }
 
-#if DEBUG
             watch.Stop();
-            Debug.WriteLine("{0} executed in time {1}.", "GenerateNames", watch.Elapsed);
-#endif
+            Program.logger.Debug(String.Format("{0} executed in time {1}.", "GenerateNames", watch.Elapsed));
         }
 
         /// <summary>
@@ -91,6 +91,12 @@ namespace Name_Lich
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnExit_Click(object sender, EventArgs e)
         {
+            Program.logger.Info("Middle Exit button clicked.");
+
+            if (pad != null && !pad.IsDisposed)
+            {
+                pad.Dispose();
+            }
             Application.Exit();
         }
 
@@ -101,6 +107,8 @@ namespace Name_Lich
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Program.logger.Info("About tool strip button clicked.");
+
             var aboutBox = new NameLichAboutBox();
 
             aboutBox.ShowDialog();
@@ -113,18 +121,35 @@ namespace Name_Lich
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var sb = new StringBuilder();
+            Program.logger.Info("Copy tool strip button clicked.");
+            string statusText;
 
-            for (var i = 0; i < lbGeneratedNames.SelectedItems.Count - 1; i++)
+            var numNames = lbGeneratedNames.SelectedItems.Count;
+
+            // Make sure that there are some names to be selected
+            if (numNames > 0)
             {
-                var name = lbGeneratedNames.SelectedItems[i];
+                var sb = new StringBuilder();
 
-                sb.AppendLine((string)name);
+                for (int i = 0; i < numNames - 1; i++)
+                {
+                    var name = lbGeneratedNames.SelectedItems[i];
+
+                    sb.AppendLine((string)name);
+                }
+                sb.Append(lbGeneratedNames.SelectedItems[numNames - 1]);
+
+                Clipboard.SetText(sb.ToString());
+                statusText = string.Format("{0} name{1} copied to the clipboard", numNames, numNames == 1 ? "" : "s");
+                Program.logger.Info(string.Format("{0} name{1} copied", numNames, numNames == 1 ? "" : "s"));
             }
-            sb.Append(lbGeneratedNames.SelectedItems[lbGeneratedNames.SelectedItems.Count - 1]);
+            else
+            {
+                // There were no names selected. Let the user know
+                statusText = "No names are selected!";
+            }
 
-            Clipboard.SetText(sb.ToString());
-            var statusText = string.Format("{0} names copied to the clipboard", lbGeneratedNames.SelectedItems.Count);
+            // Display the text that needs to be displayed
             toolStatusLblLeft.Text = statusText;
         }
 
@@ -136,16 +161,19 @@ namespace Name_Lich
         /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
         private void lbGeneratedNames_RightMouseClick(object sender, MouseEventArgs e)
         {
-            Debug.WriteLine("Mouse button released in list box!");
+            Program.logger.Debug("Mouse button released in list box!");
 
             var index = lbGeneratedNames.IndexFromPoint(e.Location);
+
+            Program.logger.Info(String.Format("{0} button clicked selecting {1} index in Names list box",
+                System.Enum.GetName(typeof(System.Windows.Forms.MouseButtons), e.Button), index));
 
             if (index < 0)
                 lbGeneratedNames.SelectedIndices.Clear();
 
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                Debug.WriteLine("Right mouse button released in list box!");
+                Program.logger.Debug("Right mouse button released in list box!");
 
                 if (index >= 0)
                 {
@@ -170,6 +198,9 @@ namespace Name_Lich
         {
             if (lbGeneratedNames.SelectedIndices.Count > 0)
             {
+                Program.logger.Info(String.Format("Regenerate {0} items context menu item selected",
+                    lbGeneratedNames.SelectedIndices.Count));
+
                 var generator = cbNameType.SelectedItem as AbstractNameGenerator;
 
                 if (generator != null)
@@ -195,6 +226,45 @@ namespace Name_Lich
                         lbGeneratedNames.SelectedIndices.Add(index);
                     }
                 }
+            }
+        }
+
+        public delegate void addScratchPadNamesDelegate(IEnumerable<string> list);
+
+        private addScratchPadNamesDelegate addNamesDelegate;
+
+        private ScratchPad pad;
+
+        public void openScratchPad()
+        {
+            if (pad == null)
+            {
+                pad = new ScratchPad();
+                addNamesDelegate = new addScratchPadNamesDelegate(pad.AddNames);
+            }
+
+            pad.Show();
+            btnSendToScratchPad.Visible = true;
+        }
+
+        private void showScratchPadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.logger.Info("Show Scratch Pad tool strip selected!");
+            openScratchPad();
+        }
+
+        private void btnSendToScratchPad_Click(object sender, EventArgs e)
+        {
+            Program.logger.Info(String.Format("{0} names sent to scratch pad with scratch pad button",
+                lbGeneratedNames.SelectedItems.Count));
+
+            if (lbGeneratedNames.SelectedItems.Count > 0)
+            {
+                addNamesDelegate(lbGeneratedNames.SelectedItems.Cast<string>());
+            }
+            else
+            {
+                toolStatusLblLeft.Text = "No names are selected!";
             }
         }
     }

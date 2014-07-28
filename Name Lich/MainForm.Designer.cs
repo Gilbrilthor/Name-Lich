@@ -39,12 +39,14 @@
             this.lblNames = new System.Windows.Forms.Label();
             this.msTopMenu = new System.Windows.Forms.MenuStrip();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showScratchPadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStatusLblLeft = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbGeneratedNames = new System.Windows.Forms.ListBox();
             this.cMenuNameMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.regenerateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSendToScratchPad = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nNameNumber)).BeginInit();
             this.msTopMenu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -128,6 +130,7 @@
             // 
             this.msTopMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem,
+            this.showScratchPadToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.msTopMenu.Location = new System.Drawing.Point(0, 0);
             this.msTopMenu.Name = "msTopMenu";
@@ -138,9 +141,17 @@
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.copyToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // showScratchPadToolStripMenuItem
+            // 
+            this.showScratchPadToolStripMenuItem.Name = "showScratchPadToolStripMenuItem";
+            this.showScratchPadToolStripMenuItem.Size = new System.Drawing.Size(113, 20);
+            this.showScratchPadToolStripMenuItem.Text = "Show Scratch Pad";
+            this.showScratchPadToolStripMenuItem.Click += new System.EventHandler(this.showScratchPadToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -188,11 +199,23 @@
             this.regenerateToolStripMenuItem.Text = "&Regenerate";
             this.regenerateToolStripMenuItem.Click += new System.EventHandler(this.regenerateToolStripMenuItem_Click);
             // 
+            // btnSendToScratchPad
+            // 
+            this.btnSendToScratchPad.Location = new System.Drawing.Point(16, 138);
+            this.btnSendToScratchPad.Name = "btnSendToScratchPad";
+            this.btnSendToScratchPad.Size = new System.Drawing.Size(118, 23);
+            this.btnSendToScratchPad.TabIndex = 11;
+            this.btnSendToScratchPad.Text = "Send To &Pad";
+            this.btnSendToScratchPad.UseVisualStyleBackColor = true;
+            this.btnSendToScratchPad.Visible = false;
+            this.btnSendToScratchPad.Click += new System.EventHandler(this.btnSendToScratchPad_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(279, 273);
+            this.Controls.Add(this.btnSendToScratchPad);
             this.Controls.Add(this.lbGeneratedNames);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lblNames);
@@ -205,6 +228,7 @@
             this.Controls.Add(this.msTopMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msTopMenu;
+            this.MinimumSize = new System.Drawing.Size(295, 311);
             this.Name = "MainForm";
             this.Text = "Name Lich";
             ((System.ComponentModel.ISupportInitialize)(this.nNameNumber)).EndInit();
@@ -235,6 +259,8 @@
         private System.Windows.Forms.ListBox lbGeneratedNames;
         private System.Windows.Forms.ContextMenuStrip cMenuNameMenu;
         private System.Windows.Forms.ToolStripMenuItem regenerateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showScratchPadToolStripMenuItem;
+        private System.Windows.Forms.Button btnSendToScratchPad;
     }
 }
 
