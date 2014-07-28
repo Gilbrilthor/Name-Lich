@@ -65,18 +65,17 @@ namespace Name_Lich
             var generator = cbNameType.SelectedItem as AbstractNameGenerator;
 
             // Check the generator
-            if (generator != null)
-            {
-                // Create a list of ListViewItems from names generated
-                var generatedNames =
-                    (from number in Enumerable.Range(0, (int)nNameNumber.Value)
-                     select generator.GenerateName());
+            if (generator == null) return;
 
-                // Add all the generated names to the list view
-                foreach (var name in generatedNames)
-                {
-                    lbGeneratedNames.Items.Add(name);
-                }
+            // Create a list of ListViewItems from names generated
+            var generatedNames =
+                (from number in Enumerable.Range(0, (int)nNameNumber.Value)
+                    select generator.GenerateName());
+
+            // Add all the generated names to the list view
+            foreach (var name in generatedNames)
+            {
+                lbGeneratedNames.Items.Add(name);
             }
 
 #if DEBUG
@@ -114,9 +113,9 @@ namespace Name_Lich
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
-            for (int i = 0; i < lbGeneratedNames.SelectedItems.Count - 1; i++)
+            for (var i = 0; i < lbGeneratedNames.SelectedItems.Count - 1; i++)
             {
                 var name = lbGeneratedNames.SelectedItems[i];
 
