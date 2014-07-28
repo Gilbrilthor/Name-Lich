@@ -6,7 +6,7 @@ namespace Name_Lich
 {
     internal static class Program
     {
-        internal static Logger logger = new Logger("Log-NameLich");
+        internal static readonly Logger Logger = new Logger("Log-NameLich", shouldLog:Properties.Settings.Default.ShouldLog);
 
         /// <summary>
         /// The main entry point for the application.
@@ -24,12 +24,12 @@ namespace Name_Lich
             {
                 if (ex.GetType() != typeof(System.Deployment.Application.InvalidDeploymentException))
                 {
-                    logger.LogException(ex,
+                    Logger.LogException(ex,
                     ex.GetType() != typeof(System.Deployment.Application.InvalidDeploymentException));
                 }
             }
 
-            logger.Dispose();
+            Logger.Dispose();
         }
     }
 }

@@ -41,7 +41,17 @@ namespace LoggerLib
         /// <value>
         ///   <c>true</c> if [should log]; otherwise, <c>false</c>.
         /// </value>
-        public bool ShouldLog { get; set; }
+        public bool ShouldLog
+        {
+            get { return _shouldLog; }
+            set
+            {
+                _shouldLog = value;
+                CreateLogFile();
+            }
+        }
+
+        private bool _shouldLog;
 
         /// <summary>
         /// Gets or sets the name of the log directory.

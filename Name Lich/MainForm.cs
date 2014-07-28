@@ -32,7 +32,7 @@ namespace Name_Lich
             catch (InvalidDeploymentException ex)
             {
                 Debug.WriteLine("Exception Caught: {0}", ex);
-                Program.logger.Error(String.Format("Exception Caught: {0}", ex));
+                Program.Logger.Error(String.Format("Exception Caught: {0}", ex));
                 path = ".";
             }
 
@@ -43,7 +43,7 @@ namespace Name_Lich
             catch (Exception)
             {
                 MessageBox.Show(string.Format("Error! {0} is not a valid location.", path + NAM_LOCATION));
-                Program.logger.Error(string.Format("Error! {0} is not a valid location.", path + NAM_LOCATION));
+                Program.Logger.Error(string.Format("Error! {0} is not a valid location.", path + NAM_LOCATION));
                 Application.Exit();
             }
 
@@ -57,7 +57,7 @@ namespace Name_Lich
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            Program.logger.Info("Generate button clicked");
+            Program.Logger.Info("Generate button clicked");
 
             var watch = Stopwatch.StartNew();
             // Clear the old names
@@ -72,7 +72,7 @@ namespace Name_Lich
 
             var numNamesToGenerate = (int) nNameNumber.Value;
 
-            Program.logger.Log("list", string.Format("'{0}' list used for {1} names", generator.NameType, numNamesToGenerate));
+            Program.Logger.Log("list", string.Format("'{0}' list used for {1} names", generator.NameType, numNamesToGenerate));
 
             // Create a list of ListViewItems from names generated
             var generatedNames =
@@ -86,7 +86,7 @@ namespace Name_Lich
             }
 
             watch.Stop();
-            Program.logger.Debug(String.Format("{0} executed in time {1}.", "GenerateNames", watch.Elapsed));
+            Program.Logger.Debug(String.Format("{0} executed in time {1}.", "GenerateNames", watch.Elapsed));
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Name_Lich
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnExit_Click(object sender, EventArgs e)
         {
-            Program.logger.Info("Middle Exit button clicked.");
+            Program.Logger.Info("Middle Exit button clicked.");
 
             if (pad != null && !pad.IsDisposed)
             {
@@ -112,7 +112,7 @@ namespace Name_Lich
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.logger.Info("About tool strip button clicked.");
+            Program.Logger.Info("About tool strip button clicked.");
 
             var aboutBox = new NameLichAboutBox();
 
@@ -126,7 +126,7 @@ namespace Name_Lich
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.logger.Info("Copy tool strip button clicked.");
+            Program.Logger.Info("Copy tool strip button clicked.");
             string statusText;
 
             var numNames = lbGeneratedNames.SelectedItems.Count;
@@ -146,7 +146,7 @@ namespace Name_Lich
 
                 Clipboard.SetText(sb.ToString());
                 statusText = string.Format("{0} name{1} copied to the clipboard", numNames, numNames == 1 ? "" : "s");
-                Program.logger.Info(string.Format("{0} name{1} copied", numNames, numNames == 1 ? "" : "s"));
+                Program.Logger.Info(string.Format("{0} name{1} copied", numNames, numNames == 1 ? "" : "s"));
             }
             else
             {
@@ -166,11 +166,11 @@ namespace Name_Lich
         /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
         private void lbGeneratedNames_RightMouseClick(object sender, MouseEventArgs e)
         {
-            Program.logger.Debug("Mouse button released in list box!");
+            Program.Logger.Debug("Mouse button released in list box!");
 
             var index = lbGeneratedNames.IndexFromPoint(e.Location);
 
-            Program.logger.Info(String.Format("{0} button clicked selecting {1} index in Names list box",
+            Program.Logger.Info(String.Format("{0} button clicked selecting {1} index in Names list box",
                 System.Enum.GetName(typeof(System.Windows.Forms.MouseButtons), e.Button), index));
 
             if (index < 0)
@@ -178,7 +178,7 @@ namespace Name_Lich
 
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                Program.logger.Debug("Right mouse button released in list box!");
+                Program.Logger.Debug("Right mouse button released in list box!");
 
                 if (index >= 0)
                 {
@@ -203,7 +203,7 @@ namespace Name_Lich
         {
             if (lbGeneratedNames.SelectedIndices.Count > 0)
             {
-                Program.logger.Info(String.Format("Regenerate {0} items context menu item selected",
+                Program.Logger.Info(String.Format("Regenerate {0} items context menu item selected",
                     lbGeneratedNames.SelectedIndices.Count));
 
                 var generator = cbNameType.SelectedItem as AbstractNameGenerator;
@@ -254,13 +254,13 @@ namespace Name_Lich
 
         private void showScratchPadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.logger.Info("Show Scratch Pad tool strip selected!");
+            Program.Logger.Info("Show Scratch Pad tool strip selected!");
             openScratchPad();
         }
 
         private void btnSendToScratchPad_Click(object sender, EventArgs e)
         {
-            Program.logger.Info(String.Format("{0} names sent to scratch pad with scratch pad button",
+            Program.Logger.Info(String.Format("{0} names sent to scratch pad with scratch pad button",
                 lbGeneratedNames.SelectedItems.Count));
 
             if (lbGeneratedNames.SelectedItems.Count > 0)
@@ -271,6 +271,21 @@ namespace Name_Lich
             {
                 toolStatusLblLeft.Text = "No names are selected!";
             }
+        }
+
+        private PreferencesForm _preferencesForm;
+
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.Logger.Info("PreferencesForm tool strip selected!");
+
+            // Make a reference to the form if it doesn't exist.
+            if (_preferencesForm == null)
+            {
+                _preferencesForm = new PreferencesForm();
+            }
+
+            _preferencesForm.ShowDialog();
         }
     }
 }

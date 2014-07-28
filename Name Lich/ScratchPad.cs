@@ -131,7 +131,7 @@ namespace Name_Lich
 
         private void scratchPad_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Program.logger.Info("Scratch pad closed!");
+            Program.Logger.Info("Scratch pad closed!");
             e.Cancel = true;
 
             this.Hide();
@@ -139,19 +139,19 @@ namespace Name_Lich
 
         private void selectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.logger.Info("Copy Selected names clicked");
+            Program.Logger.Info("Copy Selected names clicked");
             CopySelectedNames();
         }
 
         private void allToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.logger.Info("Copy all names item selected");
+            Program.Logger.Info("Copy all names item selected");
             CopyAllNames();
         }
 
         private void selectedToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Program.logger.Info("Delete selected names in scratchpad selected");
+            Program.Logger.Info("Delete selected names in scratchpad selected");
             int numSelected = lbNames.SelectedItems.Count;
             if (numSelected > 0)
             {
@@ -171,7 +171,7 @@ namespace Name_Lich
 
         private void allToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Program.logger.Info("Delete all names in scratch pad selected");
+            Program.Logger.Info("Delete all names in scratch pad selected");
             int numSelected = lbNames.Items.Count;
             if (numSelected > 0)
             {
