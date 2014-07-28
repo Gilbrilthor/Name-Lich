@@ -47,7 +47,14 @@ namespace LoggerLib
             set
             {
                 _shouldLog = value;
-                CreateLogFile();
+                if (_shouldLog)
+                {
+                    CreateLogFile();
+                }
+                else
+                {
+                    _logFile.Close();
+                }
             }
         }
 
