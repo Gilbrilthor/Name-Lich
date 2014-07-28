@@ -69,9 +69,14 @@ namespace Name_Lich
             // Check the generator
             if (generator == null) return;
 
+
+            var numNamesToGenerate = (int) nNameNumber.Value;
+
+            Program.logger.Log("list", string.Format("'{0}' list used for {1} names", generator.NameType, numNamesToGenerate));
+
             // Create a list of ListViewItems from names generated
             var generatedNames =
-                (from number in Enumerable.Range(0, (int)nNameNumber.Value)
+                (from number in Enumerable.Range(0, numNamesToGenerate)
                     select generator.GenerateName());
 
             // Add all the generated names to the list view
