@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-<<<<<<< HEAD
-VisualStudioVersion = 12.0.30110.0
-=======
-VisualStudioVersion = 12.0.21005.1
->>>>>>> e28cf4aa51537474440ad2d40fe56bbddc648c00
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Name Lich", "Name Lich\Name Lich.csproj", "{6D77D5EF-7012-45AB-A709-059431563B52}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Name Lich Backend", "Name Lich Backend\Name Lich Backend.csproj", "{93BDC814-0B79-4538-8AA9-A62F8327F33A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "loggerLib", "loggerLib\loggerLib.csproj", "{58C0BE6A-2712-4ADA-82B4-5E20536FD451}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Markov List Backend", "Markov List Backend\Markov List Backend.csproj", "{6FA7CECC-BE8F-495F-B2FB-7A524F5DEB9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Name Lich Test", "Name Lich Test\Name Lich Test.csproj", "{F75611FD-BD04-43C3-90FF-9EB1387085C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +31,14 @@ Global
 		{58C0BE6A-2712-4ADA-82B4-5E20536FD451}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58C0BE6A-2712-4ADA-82B4-5E20536FD451}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58C0BE6A-2712-4ADA-82B4-5E20536FD451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FA7CECC-BE8F-495F-B2FB-7A524F5DEB9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA7CECC-BE8F-495F-B2FB-7A524F5DEB9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA7CECC-BE8F-495F-B2FB-7A524F5DEB9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA7CECC-BE8F-495F-B2FB-7A524F5DEB9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F75611FD-BD04-43C3-90FF-9EB1387085C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F75611FD-BD04-43C3-90FF-9EB1387085C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F75611FD-BD04-43C3-90FF-9EB1387085C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F75611FD-BD04-43C3-90FF-9EB1387085C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
