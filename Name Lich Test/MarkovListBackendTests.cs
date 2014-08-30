@@ -11,7 +11,8 @@ namespace Name_Lich_Test
         [TestMethod]
         public void MarkovLink_IsPrefix_CorrectPrefix_ReturnTrue()
         {
-            var chain = new MarkovLink<string>();
+            var r = new Random();
+            var chain = new MarkovLink<string>(r);
 
             var prefix = new[] {"one", "two"};
 
@@ -25,7 +26,8 @@ namespace Name_Lich_Test
         [TestMethod]
         public void MarkovLink_IsPrefix_IncorrectPrefix_ReturnFalse()
         {
-            var chain = new MarkovLink<string>();
+            var r = new Random();
+            var chain = new MarkovLink<string>(r);
 
             var prefix = new[] {"one", "two"};
 
@@ -42,7 +44,8 @@ namespace Name_Lich_Test
         [TestMethod]
         public void MarkovLink_IsPrefix_DifferentSizePrefix_ReturnFalse()
         {
-            var chain = new MarkovLink<string>();
+            var r = new Random();
+            var chain = new MarkovLink<string>(r);
 
             var prefix = new[] {"one"};
 

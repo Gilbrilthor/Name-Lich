@@ -8,29 +8,10 @@ namespace Name_Lich_Backend
     {
         private string _nameType;
 
-        private List<string> startList;
-        private List<string> middleList;
         private List<string> endList;
-
-        public List<string> StartList
-        {
-            get { return startList; }
-            set { startList = value; }
-        }
-
-        public List<string> MiddleList
-        {
-            get { return middleList; }
-            set { middleList = value; }
-        }
-
-        public List<string> EndList
-        {
-            get { return endList; }
-            set { endList = value; }
-        }
-
+        private List<string> middleList;
         private Random random;
+        private List<string> startList;
 
         public NamNameGenerator(System.Random random, string nameType, IEnumerable<string> startList, IEnumerable<string> middleList, IEnumerable<string> endList)
         {
@@ -40,6 +21,24 @@ namespace Name_Lich_Backend
             this.endList = endList.ToList();
 
             this.random = random;
+        }
+
+        public List<string> EndList
+        {
+            get { return endList; }
+            set { endList = value; }
+        }
+
+        public List<string> MiddleList
+        {
+            get { return middleList; }
+            set { middleList = value; }
+        }
+
+        public List<string> StartList
+        {
+            get { return startList; }
+            set { startList = value; }
         }
 
         /// <summary>
@@ -55,11 +54,6 @@ namespace Name_Lich_Backend
             return string.Format("{0}{1}{2}", beginning, middle, end);
         }
 
-        protected override string getNameType()
-        {
-            return _nameType;
-        }
-
         public override string ToString()
         {
 #if DEBUG
@@ -68,6 +62,11 @@ namespace Name_Lich_Backend
 #else
             return NameType;
 #endif
+        }
+
+        protected override string getNameType()
+        {
+            return _nameType;
         }
     }
 }

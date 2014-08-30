@@ -8,9 +8,8 @@ namespace Name_Lich_Backend
 {
     public class NamFileNameReader : AbstractNameReader
     {
-        private const string NAME_FILE_SUFFIX = "*.nam";
         private const string COMMENT_IDENTIFIER = "/*";
-
+        private const string NAME_FILE_SUFFIX = "*.nam";
         private Random random;
 
         public NamFileNameReader(Random random)

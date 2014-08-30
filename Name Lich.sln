@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Markov List Backend", "Mark
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Name Lich Test", "Name Lich Test\Name Lich Test.csproj", "{F75611FD-BD04-43C3-90FF-9EB1387085C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkovTestDriver", "MarkovTestDriver\MarkovTestDriver.csproj", "{E83759B1-5CEE-4A70-B923-EB6E58F0C6D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,8 +41,15 @@ Global
 		{F75611FD-BD04-43C3-90FF-9EB1387085C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F75611FD-BD04-43C3-90FF-9EB1387085C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F75611FD-BD04-43C3-90FF-9EB1387085C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E83759B1-5CEE-4A70-B923-EB6E58F0C6D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E83759B1-5CEE-4A70-B923-EB6E58F0C6D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E83759B1-5CEE-4A70-B923-EB6E58F0C6D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E83759B1-5CEE-4A70-B923-EB6E58F0C6D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

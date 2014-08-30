@@ -11,6 +11,20 @@ namespace Markov_List_Backend
     /// <typeparam name="T">Type contained within the link.</typeparam>
     public class MarkovLink<T>
     {
+        private Random _r;
+
+        private static int _nextId;
+
+        public int Id { get; private set; }
+
+        public MarkovLink(Random r)
+        {
+            _r = r;
+            Id = _nextId++;
+            Prefixes = new List<T>();
+            Suffixes = new HashSet<SuffixCount<T>>();
+        }
+
         /// <summary>
         /// Gets or sets the prefix.
         /// </summary>
@@ -24,7 +38,7 @@ namespace Markov_List_Backend
         /// <value>
         /// The suffixes.
         /// </value>
-        public SuffixCount<T> Suffixes { get; set; }
+        public HashSet<SuffixCount<T>> Suffixes { get; set; }
 
         /// <summary>
         /// Determines whether the specified prefixes is prefix.
@@ -54,8 +68,59 @@ namespace Markov_List_Backend
         /// <param name="suffixToAdd">The suffix to add.</param>
         public void AddSuffix(T suffixToAdd)
         {
-            
+            AddSuffixCount(suffixToAdd, 1);
         }
+
+        private void AddSuffixCount(T suffixToAdd, int count)
+        {
+            var sfx = Suffixes.FirstOrDefault(s => s.Suffix.Equals(suffixToAdd));
+            if (sfx != null)
+            {
+                sfx.Count += count;
+            }
+            else
+            {
+                sfx = new SuffixCount<T>(suffixToAdd);
+                Suffixes.Add(sfx);
+            }
+        }
+
+        public void AddSuffixFromLink(MarkovLink<T> otherLink)
+        {
+            foreach (var suffixCount in otherLink.Suffixes)
+            {
+                AddSuffixCount(suffixCount.Suffix, suffixCount.Count);
+            }
+        }
+
+        public T GetRandomSuffix(bool includeTerminatorSuffix = false)
+        {
+            var countSum = Suffixes.Sum(s => s.Count);
+            var randomNumber = _r.Next(countSum);
+            List<SuffixCount<T>> suffixesToSearch = null;
+            if (includeTerminatorSuffix)
+            {
+                suffixesToSearch = Suffixes.OrderBy(s => s.Count).ToList();
+            }
+            else
+            {
+                suffixesToSearch = Suffixes.Where(s => !s.Suffix.Equals(Terminator)).OrderBy(s => s.Count).ToList();
+            }
+
+            var suffixQueue = new Queue<SuffixCount<T>>(suffixesToSearch);
+
+            SuffixCount<T> targetSuffix = suffixQueue.Dequeue();
+
+            while (randomNumber > 0 && suffixQueue.Count > 0)
+            {
+                randomNumber -= targetSuffix.Count;
+                targetSuffix = suffixQueue.Dequeue();
+            }
+
+            return targetSuffix.Suffix;
+        }
+
+        public T Terminator { get; set; }
 
         /// <summary>
         /// Determines whether the specified <see cref="System.Object" }, is equal to this instance.
@@ -79,10 +144,14 @@ namespace Markov_List_Backend
                 return false;
             }
 
-            // TODO: write your implementation of Equals() here
-            throw new NotImplementedException();
-            return base.Equals(obj);
-            
+
+            return Equals(otherLink:obj as MarkovLink<T>);
+
+        }
+
+        public bool Equals(MarkovLink<T> otherLink)
+        {
+            return IsPrefix(otherLink.Prefixes.ToArray());
         }
 
         /// <summary>
@@ -91,12 +160,45 @@ namespace Markov_List_Backend
         /// <returns>
         /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
         /// </returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         public override int GetHashCode()
         {
-            // TODO: write your implementation of GetHashCode() here
-            throw new NotImplementedException();
-            return base.GetHashCode();
+            var sb = new StringBuilder();
+
+            foreach (var prefix in Prefixes)
+            {
+                sb.Append(prefix.GetHashCode());
+            }
+
+            return sb.ToString().GetHashCode();
+            // Compute hash by exponentiating the individual prefixes hash codes
+            unchecked
+            {
+                var hash = Prefixes.Aggregate(17, (acc, c) => acc * 23 + c.GetHashCode());
+                return hash;
+            } 
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendFormat("<{0} ", Id);
+
+            foreach (var prefix in Prefixes)
+            {
+                sb.AppendFormat("{0} ", prefix);
+            }
+
+            sb.Append(":");
+
+            foreach (var suffixCount in Suffixes.OrderByDescending(s => s.Count))
+            {
+                sb.AppendFormat("{0} ", suffixCount.ToString());
+            }
+
+            sb.Append(">");
+
+            return sb.ToString();
         }
     }
 
@@ -106,6 +208,12 @@ namespace Markov_List_Backend
     /// <typeparam name="T">The type contained in the suffix</typeparam>
     public class SuffixCount<T> : IEquatable<SuffixCount<T>>
     {
+        public SuffixCount(T suffixValue)
+        {
+            Suffix = suffixValue;
+            Count = 1;
+        }
+
         /// <summary>
         /// Gets or sets the suffix.
         /// </summary>
@@ -169,6 +277,11 @@ namespace Markov_List_Backend
         public override int GetHashCode()
         {
             return Suffix.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0},{1}", Suffix, Count);
         }
     }
 }
