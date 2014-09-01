@@ -21,6 +21,7 @@ namespace Markov_List_Backend
             _r = r;
             _links = new Dictionary<int, MarkovLink<char>>();
             LettersToKeep = 3;
+            TerminatorCharacter = (char)0x3; // The ETX, or End Text Character
         }
 
         /// <summary>
@@ -65,12 +66,14 @@ namespace Markov_List_Backend
                 return null;
         }
 
+        public char TerminatorCharacter { get; set; }
+
         private MarkovLink<char> GetRandomStartLink()
         {
             var startLinks = (from l in _links.Values
-                where l.Prefixes[0] == ' '
+                where l.Prefixes[0] == TerminatorCharacter
                       &&
-                      l.Suffixes.Any(s => s.Suffix != ' ')
+                      l.Suffixes.Any(s => s.Suffix != TerminatorCharacter)
                 select l).ToList();
 
             return startLinks[_r.Next(startLinks.Count)];
@@ -91,7 +94,7 @@ namespace Markov_List_Backend
             sb.Append(targetLink.GetRandomSuffix());
 
             // while havent met maxLength and not end link
-            while (sb[sb.Length - 1] != ' ' && (!maxLength.HasValue || sb.Length < maxLength.Value))
+            while (sb[sb.Length - 1] != TerminatorCharacter && (!maxLength.HasValue || sb.Length < maxLength.Value))
             {
                 // grab the last characters of the text. LettersToKeep - 1
                 var charArray = sb.ToString().ToCharArray();
@@ -106,7 +109,7 @@ namespace Markov_List_Backend
             }
 
             //return result
-            return sb.ToString().Trim();
+            return sb.ToString().Trim(TerminatorCharacter);
         }
 
         private void AddLink(char[] bitOfIndex)
@@ -130,7 +133,7 @@ namespace Markov_List_Backend
         private char[] SmartParse(string input, int index)
         {
             // Fill the array with spaces
-            var array = Enumerable.Repeat(' ', LettersToKeep).ToArray();
+            var array = Enumerable.Repeat(TerminatorCharacter, LettersToKeep).ToArray();
             var arrayIndex = 0;
             var startingIndex = index;
 

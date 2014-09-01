@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="CharsToStrip" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.,&gt;&lt;/?;:"[]{}\|-=_+!@#$%^&amp;*()0123456789</Value>
+      <Value Profile="(Default)">&gt;&lt;/[]{}\|.,?!=_+@#$%^&amp;*()0123456789</Value>
     </Setting>
   </Settings>
 </SettingsFile>

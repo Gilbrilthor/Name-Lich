@@ -170,12 +170,6 @@ namespace Markov_List_Backend
             }
 
             return sb.ToString().GetHashCode();
-            // Compute hash by exponentiating the individual prefixes hash codes
-            unchecked
-            {
-                var hash = Prefixes.Aggregate(17, (acc, c) => acc * 23 + c.GetHashCode());
-                return hash;
-            } 
         }
 
         public override string ToString()

@@ -14,18 +14,19 @@ namespace MarkovTestDriver
         static void Main(string[] args)
         {
             var testText = "hel45o[ the^5re";
-            testText = File.ReadAllText(@"D:\Users\Matthew\Desktop\gulliver's Travels.txt");
+            testText = File.ReadAllText(@"D:\Users\Matthew\Desktop\egyptianNames.csv");
             //testText = "hello";
             var r = new Random();
             var chain = new MarkovChain(r);
+            chain.TerminatorCharacter = '\n';
 
-            for (int ltk = 2; ltk < 20; ltk++)
+            for (int ltk = 2; ltk < 10; ltk++)
             {
                 var sw = Stopwatch.StartNew();
                 chain.LettersToKeep = ltk;
                 chain.ConsumeText(testText);
                 Console.WriteLine("Keeping {0}", ltk);
-                for (int i = 0; i < 15; i++)
+                for (var i = 0; i < 15; i++)
                 {
                     var output = chain.BuildText();
                     Console.WriteLine(output);

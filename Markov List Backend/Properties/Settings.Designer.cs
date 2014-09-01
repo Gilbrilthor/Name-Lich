@@ -25,7 +25,7 @@ namespace Markov_List_Backend.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".,></?;:\"[]{}\\|-=_+!@#$%^&*()0123456789")]
+        [global::System.Configuration.DefaultSettingValueAttribute("></[]{}\\|.,?!=_+@#$%^&*()0123456789")]
         public string CharsToStrip {
             get {
                 return ((string)(this["CharsToStrip"]));
