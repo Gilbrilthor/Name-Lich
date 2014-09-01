@@ -9,7 +9,7 @@ using Markov_List_Backend;
 
 namespace Name_Lich_Android
 {
-    [Activity(Label = "Name_Lich_Android", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Name Lich", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private MarkovChain _chain;
@@ -22,7 +22,7 @@ namespace Name_Lich_Android
 
             _chain = new MarkovChain(r)
             {
-                LettersToKeep = 2,
+                LettersToKeep = 3,
                 TerminatorCharacter = '\n'
             };
 
