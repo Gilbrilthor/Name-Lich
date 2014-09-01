@@ -32,11 +32,13 @@ namespace Markov_List_Backend
         /// <returns>cleaned string.</returns>
         private string Cleanup(string input)
         {
+            var charsToStrip = Constants.CharsToStrip;
+
 
             // strip all punctuation, leaving newlines
             // The setting CharsToStrip contain all the characters to remove
             var strippedInput = new string((from c in input.ToCharArray()
-                where !Properties.Settings.Default.CharsToStrip.Contains(c)
+                where !charsToStrip.Contains(c)
                 select c).ToArray());
 
             return strippedInput;

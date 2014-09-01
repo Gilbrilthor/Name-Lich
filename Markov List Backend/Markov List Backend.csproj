@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="MarkovChain.cs" />
     <Compile Include="MarkovLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
