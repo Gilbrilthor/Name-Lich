@@ -9,7 +9,7 @@ namespace Markov_List_Backend
     /// Link that contains a single prefix and all the associated suffixes.
     /// </summary>
     /// <typeparam name="T">Type contained within the link.</typeparam>
-    public class MarkovLink<T>
+    public class MarkovLink<T> where T: IConvertible
     {
         private Random _r;
 
@@ -194,6 +194,57 @@ namespace Markov_List_Backend
 
             return sb.ToString();
         }
+
+        public string SerializeToText(char mainSeparator, char secondarySeparator)
+        {
+            var sb = new StringBuilder();
+
+            foreach (var prefix in Prefixes)
+            {
+                sb.AppendFormat("{0}{1}", prefix, secondarySeparator);
+            }
+
+            // Remove the last separator by replacing it with the main separator
+            sb[sb.Length - 1] = mainSeparator;
+
+            foreach (var suffixCount in Suffixes)
+            {
+                sb.AppendFormat("{0}{2}{1}{2}",
+                    suffixCount.Suffix,
+                    suffixCount.Count,
+                    secondarySeparator);
+            }
+
+            // remove the trailing separator by making it a mainSeparator
+            sb[sb.Length - 1] = mainSeparator;
+
+            return sb.ToString();
+        }
+
+        public static MarkovLink<T> DeserializeFromText(string prefixString, string suffixString, char secondarySeparator, Random r)
+        {
+            var link = new MarkovLink<T>(r);
+
+            var objs = prefixString.Split(secondarySeparator);
+
+            var items = (from o in objs
+                select (T)System.Convert.ChangeType(o, typeof(T))).ToArray();
+
+            link.Prefixes.AddRange(items);
+
+            var suffixQueue = new Queue<string>(suffixString.Split(secondarySeparator));
+
+            do
+            {
+                var suffix = (T) System.Convert.ChangeType(suffixQueue.Dequeue(), typeof (T));
+                
+                var count = int.Parse(suffixQueue.Dequeue());
+
+                link.Suffixes.Add(new SuffixCount<T>(suffix, count));
+            } while (suffixQueue.Count > 0);
+
+            return link;
+        }
     }
 
     /// <summary>
@@ -206,6 +257,12 @@ namespace Markov_List_Backend
         {
             Suffix = suffixValue;
             Count = 1;
+        }
+
+        public SuffixCount(T suffixValue, int count)
+            :this(suffixValue)
+        {
+            Count = count;
         }
 
         /// <summary>

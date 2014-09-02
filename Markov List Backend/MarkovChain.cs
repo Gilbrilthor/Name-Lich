@@ -14,6 +14,14 @@ namespace Markov_List_Backend
 
         private string _inputText { get; set; }
 
+        /// <summary>
+        /// Gets or sets the name type of the chain.
+        /// </summary>
+        /// <value>
+        /// The name type of the chain.
+        /// </value>
+        public string ChainName { get; set; }
+
         public int LettersToKeep { get; set; }
 
         public MarkovChain(Random r)
@@ -41,11 +49,17 @@ namespace Markov_List_Backend
                 where !charsToStrip.Contains(c)
                 select c).ToArray());
 
+            // Make sure newlines are just \n
+            strippedInput = strippedInput.Replace("\r", "");
+
             return strippedInput;
         }
 
         public void ConsumeText(string input)
         {
+            // Make sure that no links from last consumption are there
+            _links.Clear();
+
             _inputText = input;
             var cleanedText = Cleanup(input);
 
@@ -58,6 +72,50 @@ namespace Markov_List_Backend
                 var bitOfIndex = SmartParse(cleanedText, i);
                 AddLink(bitOfIndex);
             }
+        }
+        public string SerializeToText()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendFormat("{0}{1}",ChainName, Constants.MainSeparator);
+            sb.AppendFormat("{0}{2}{1}{2}",
+                TerminatorCharacter,
+                LettersToKeep,
+                Constants.MainSeparator);
+
+            foreach (var markovLink in _links.Values)
+            {
+                sb.Append(markovLink.SerializeToText(Constants.MainSeparator, Constants.SecondarySeparator));
+            }
+
+            return sb.ToString();
+        }
+
+        public static MarkovChain DeserializeFromText(string text, Random r)
+        {
+            var chain = new MarkovChain(r);
+            var textQueue = new Queue<string>(text.Split(new []{Constants.MainSeparator}, StringSplitOptions.RemoveEmptyEntries));
+            // Get the name type
+            chain.ChainName = textQueue.Dequeue();
+
+            // Get the terminator and LettersToKeep
+            chain.TerminatorCharacter = textQueue.Dequeue()[0];
+            chain.LettersToKeep = int.Parse(textQueue.Dequeue());
+            // Get all the links
+            do
+            {
+                var prefixString = textQueue.Dequeue();
+                var suffixString = textQueue.Dequeue();
+
+                var link = MarkovLink<char>.DeserializeFromText(prefixString,
+                    suffixString,
+                    Constants.SecondarySeparator,
+                    r);
+
+                chain._links.Add(link.GetHashCode(), link);
+            } while (textQueue.Count > 0);
+
+            return chain;
         }
 
         private MarkovLink<char> GetLink(MarkovLink<char> key)
@@ -154,7 +212,7 @@ namespace Markov_List_Backend
                 startingIndex = 0;
             }
 
-            while (startingIndex < input.Length && arrayIndex < array.Length)
+            while (startingIndex < input.Length && arrayIndex < array.Length && input[startingIndex] != TerminatorCharacter)
             {
                 array[arrayIndex++] = input[startingIndex++];
             }
