@@ -63,14 +63,20 @@ namespace Markov_List_Backend
             _inputText = input;
             var cleanedText = Cleanup(input);
 
-            for (int i = -LettersToKeep; i < cleanedText.Length; i++)
-            {
-                // Skip -1 so that the smart parse doesn't return duplicate arrays
-                // for the beginning of the input.
-                if (i == -1) continue;
+            var textQueue = new Queue<string>(cleanedText.Split(new []{TerminatorCharacter}, StringSplitOptions.RemoveEmptyEntries));
 
-                var bitOfIndex = SmartParse(cleanedText, i);
-                AddLink(bitOfIndex);
+            while (textQueue.Count > 0)
+            {
+                var textToParse = textQueue.Dequeue();
+                for (int i = -LettersToKeep; i < textToParse.Length; i++)
+                {
+                    // Skip -1 so that the smart parse doesn't return duplicate arrays
+                    // for the beginning of the input.
+                    if (i == -1) continue;
+
+                    var bitOfIndex = SmartParse(textToParse, i);
+                    AddLink(bitOfIndex);
+                }
             }
         }
         public string SerializeToText()
